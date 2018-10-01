@@ -5,6 +5,8 @@ import nltk
 from nltk import word_tokenize, FreqDist
 from nltk.corpus import stopwords
 import pandas as pd
+import dill
+import pickle
 
 df_ori = pd.read_csv('../data/data job posts.csv')
 df_ori.head()
@@ -42,11 +44,21 @@ from collections import defaultdict
 
 # set the default value when a key is not present in the default dict
 # sparse matrix is a dict of dicts, the value is the co-occurance value
-sparse_matrix = defaultdict(lambda: defaultdict(lambda: 0))
+sparse_matrix = {}
 
 for job_qualification_tokens in df['RequiredQual_processed']:
     for word1 in job_qualification_tokens:
+        
+        if not sparse_matrix.get(word1):
+            sparse_matrix[word1] = {}
+
         for word2 in job_qualification_tokens:
-            sparse_matrix[word1][word2]+=1
-            
-print(sparse_matrix)
+            if sparse_matrix[word1].get(word2):
+                sparse_matrix[word1][word2] += 1
+            else:
+                sparse_matrix[word1][word2] = 1
+
+pickle.dump(sparse_matrix, open("../models/qualifications_co_occurence.pkl", "wb"))
+#print(sparse_matrix["sql"]["server"])
+
+print("Written to Pickle file...")
