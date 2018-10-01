@@ -1,2 +1,4 @@
 .ipynb_checkpoints/
-models/qualifications_co_occurence.pkl
+outputs/
+outputs/qualifications_co_occurence.pkl
+outputs/nltk_pos1.csv

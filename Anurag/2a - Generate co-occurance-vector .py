@@ -58,7 +58,7 @@ for job_qualification_tokens in df['RequiredQual_processed']:
             else:
                 sparse_matrix[word1][word2] = 1
 
-pickle.dump(sparse_matrix, open("../models/qualifications_co_occurence.pkl", "wb"))
+pickle.dump(sparse_matrix, open("../outputs/qualifications_co_occurence.pkl", "wb"))
 #print(sparse_matrix["sql"]["server"])
 
 print("Written to Pickle file...")
