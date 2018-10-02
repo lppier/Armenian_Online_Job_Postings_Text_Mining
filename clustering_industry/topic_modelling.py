@@ -21,12 +21,12 @@ import spacy
 def preprocess(tokens):
     tokens_nop = [t for t in tokens if t not in string.punctuation]
     tokens_nop = [t.lower() for t in tokens_nop]
-    #wnl = nltk.WordNetLemmatizer()
+    # wnl = nltk.WordNetLemmatizer()
     stop = stopwords.words('english')
     stop.extend(['armenian', 'job', 'title', 'position', 'location', 'responsibilities', 'application', 'procedures',
                  'deadline', 'required', 'qualifications', 'renumeration', 'salary', 'date', 'company'])
     tokens_nostop = [t for t in tokens_nop if t not in stop]
-    #tokens_lem = [wnl.lemmatize(t) for t in tokens_nostop]
+    # tokens_lem = [wnl.lemmatize(t) for t in tokens_nostop]
     tokens_clean = [t for t in tokens_nostop if len(t) >= 3]  # simple way to remove the offending " punctuations
     return tokens_clean
 
@@ -104,7 +104,7 @@ trigram_mod = gensim.models.phrases.Phraser(trigram)
 print(trigram_mod[bigram_mod[df.jobpost_processed[5]]])
 
 df.jobpost_processed = make_bigrams(df.jobpost_processed)
-df.jobpost_processed = lemmatization(df.jobpost_processed, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
+df.jobpost_processed = lemmatization(df.jobpost_processed, allowed_postags=['NOUN', 'VERB'])  # 'ADJ',, 'ADV'])
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 dictionary = corpora.Dictionary(df['jobpost_processed'])
@@ -132,7 +132,7 @@ from operator import itemgetter
 top_train = [max(t, key=itemgetter(1))[0] for t in dtopics_train]
 plt.hist(top_train, topic_num)
 plt.show()
-# 
+
 # [(0,
 #   '0.011*"report" + 0.009*"ability" + 0.009*"financial" + 0.009*"management" + 0.008*"office" + 0.008*"responsible" + 0.008*"excellent" + 0.008*"prepare" + 0.007*"provide" + 0.007*"bank"'),
 #  (1,
