@@ -23,7 +23,7 @@ def preprocess(tokens):
     tokens_nop = [t.lower() for t in tokens_nop]
     # wnl = nltk.WordNetLemmatizer()
     stop = stopwords.words('english')
-    stop.extend(['armenian', 'job', 'title', 'position', 'location', 'responsibilities', 'application', 'procedures',
+    stop.extend(['armenian','armenia', 'job', 'title', 'position', 'location', 'responsibilities', 'application', 'procedures',
                  'deadline', 'required', 'qualifications', 'renumeration', 'salary', 'date', 'company'])
     tokens_nostop = [t for t in tokens_nop if t not in stop]
     # tokens_lem = [wnl.lemmatize(t) for t in tokens_nostop]
@@ -112,7 +112,7 @@ print(dictionary)
 dictionary.filter_extremes(no_below=3, no_above=0.7)
 print(dictionary)
 
-topic_num = 10
+topic_num = 6
 
 # Use the dictionary to prepare a DTM (using TF)
 dtm_train = [dictionary.doc2bow(d) for d in df['jobpost_processed']]
@@ -128,18 +128,33 @@ for i in range(0, 5):
 
 # get and plot the distribution of the topics
 from operator import itemgetter
-
+import matplotlib.style as style
+style.use('ggplot')
+style.use('seaborn-poster')
+fig, ax = plt.subplots(figsize=(16, 9))
 top_train = [max(t, key=itemgetter(1))[0] for t in dtopics_train]
-plt.hist(top_train, topic_num)
+plt.hist(top_train, bins=topic_num-1)
+plt.title('Topic Frequencies')
 plt.show()
 
+#
 # [(0,
-#   '0.011*"report" + 0.009*"ability" + 0.009*"financial" + 0.009*"management" + 0.008*"office" + 0.008*"responsible" + 0.008*"excellent" + 0.008*"prepare" + 0.007*"provide" + 0.007*"bank"'),
+#   '0.032*"ability" + 0.021*"term" + 0.020*"communication" + 0.018*"line" + 0.017*"customer" + 0.015*"service" + 0.015*"provide" + 0.015*"office" + 0.014*"field" + 0.014*"apply"'),
 #  (1,
-#   '0.035*"project" + 0.020*"development" + 0.013*"support" + 0.012*"program" + 0.011*"activity" + 0.010*"implementation" + 0.009*"management" + 0.009*"include" + 0.009*"ensure" + 0.008*"ability"'),
+#   '0.032*"report" + 0.031*"management" + 0.021*"ensure" + 0.018*"prepare" + 0.017*"process" + 0.017*"control" + 0.015*"standard" + 0.015*"accounting" + 0.014*"finance" + 0.014*"account"'),
 #  (2,
-#   '0.021*"development" + 0.019*"software" + 0.018*"design" + 0.015*"team" + 0.012*"developer" + 0.011*"ability" + 0.011*"system" + 0.010*"develop" + 0.010*"technical" + 0.010*"web"'),
+#   '0.046*"developer" + 0.039*"bank" + 0.037*"web" + 0.026*"branch" + 0.025*"service" + 0.022*"form" + 0.020*"security" + 0.019*"indicate" + 0.017*"solution" + 0.017*"framework"'),
 #  (3,
-#   '0.017*"applicant" + 0.012*"medium" + 0.012*"construction" + 0.010*"social" + 0.010*"part" + 0.009*"contact" + 0.009*"call" + 0.009*"apply" + 0.009*"note" + 0.008*"additional"'),
+#   '0.082*"network" + 0.042*"content" + 0.040*"platform" + 0.037*"student" + 0.026*"tumo" + 0.019*"administration" + 0.017*"linux" + 0.017*"board" + 0.016*"administrator" + 0.015*"support"'),
 #  (4,
-#   '0.019*"customer" + 0.015*"sale" + 0.014*"marketing" + 0.014*"business" + 0.011*"communication" + 0.011*"ability" + 0.011*"service" + 0.010*"market" + 0.010*"product" + 0.009*"manager"')]
+#   '0.064*"project" + 0.034*"development" + 0.021*"support" + 0.020*"activity" + 0.018*"program" + 0.018*"implementation" + 0.015*"ensure" + 0.013*"sector" + 0.013*"include" + 0.012*"community"'),
+#  (5,
+#   '0.062*"criterion" + 0.059*"to/_eligibility" + 0.031*"construction" + 0.025*"safety" + 0.020*"qualify" + 0.018*"food" + 0.017*"vehicle" + 0.017*"period" + 0.016*"sense_responsibility" + 0.014*"transportation"'),
+#  (6,
+#   '0.027*"education" + 0.025*"training" + 0.018*"research" + 0.017*"october" + 0.016*"yerevan" + 0.014*"program" + 0.014*"conduct" + 0.014*"november" + 0.014*"applicant" + 0.013*"request"'),
+#  (7,
+#   '0.042*"course" + 0.039*"medium" + 0.030*"material" + 0.019*"september" + 0.018*"business" + 0.015*"office" + 0.014*"council_europe" + 0.014*"level" + 0.013*"class" + 0.011*"sponsorship"'),
+#  (8,
+#   '0.049*"sale" + 0.046*"marketing" + 0.038*"product" + 0.038*"business" + 0.035*"market" + 0.028*"develop" + 0.019*"manager" + 0.018*"llc" + 0.018*"plan" + 0.017*"client"'),
+#  (9,
+#   '0.045*"development" + 0.044*"software" + 0.037*"design" + 0.028*"team" + 0.022*"test" + 0.022*"system" + 0.020*"technology" + 0.020*"develop" + 0.016*"engineer" + 0.015*"application"')]
