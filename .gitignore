@@ -3,3 +3,4 @@ outputs/
 outputs/qualifications_co_occurence.pkl
 outputs/nltk_pos1.csv
 .vscode
+.vector_cache
