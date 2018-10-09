@@ -21,3 +21,78 @@
  (9,
   '0.045*"development" + 0.044*"software" + 0.037*"design" + 0.028*"team" + 0.022*"test" + 0.022*"system" + 0.020*"technology" + 0.020*"develop" + 0.016*"engineer" + 0.015*"application"')]
 
+
+
+9 topics
+
+[(0,
+  '0.027*"ability" + 0.019*"term" + 0.018*"communication" + 0.017*"field" + 0.017*"provide" + 0.016*"line" + 0.015*"apply" + 0.015*"information" + 0.014*"duration" + 0.013*"start"'),
+ (1,
+  '0.070*"project" + 0.038*"development" + 0.027*"program" + 0.021*"support" + 0.020*"implementation" + 0.019*"activity" + 0.017*"community" + 0.015*"sector" + 0.014*"ensure" + 0.014*"include"'),
+ (2,
+  '0.040*"development" + 0.040*"software" + 0.036*"design" + 0.025*"team" + 0.023*"developer" + 0.021*"test" + 0.019*"web" + 0.018*"technology" + 0.018*"system" + 0.017*"develop"'),
+ (3,
+  '0.093*"bank" + 0.051*"branch" + 0.033*"service" + 0.031*"platform" + 0.023*"payment" + 0.023*"loan" + 0.021*"hotel" + 0.019*"tourism" + 0.018*"client" + 0.014*"economic"'),
+ (4,
+  '0.088*"engineer" + 0.052*"engineering" + 0.034*"construction" + 0.028*"safety" + 0.017*"site" + 0.017*"amd" + 0.014*"pattern" + 0.011*"care" + 0.010*"exam" + 0.009*"hour"'),
+ (5,
+  '0.028*"course" + 0.027*"medium" + 0.020*"training" + 0.019*"material" + 0.018*"content" + 0.017*"student" + 0.013*"study" + 0.012*"event" + 0.012*"tumo" + 0.011*"level"'),
+ (6,
+  '0.025*"report" + 0.024*"prepare" + 0.021*"ensure" + 0.019*"accounting" + 0.019*"system" + 0.019*"account" + 0.018*"control" + 0.015*"finance" + 0.014*"security" + 0.014*"tax"'),
+ (7,
+  '0.050*"customer" + 0.039*"sale" + 0.037*"marketing" + 0.028*"service" + 0.028*"product" + 0.027*"market" + 0.024*"manager" + 0.020*"llc" + 0.015*"business" + 0.015*"client"'),
+ (8,
+  '0.045*"management" + 0.019*"business" + 0.017*"report" + 0.017*"plan" + 0.016*"develop" + 0.015*"process" + 0.014*"analysis" + 0.014*"datum" + 0.013*"project" + 0.012*"ensure"')]
+
+
+8 topics
+
+[(0, Customer Communication
+  '0.027*"ability" + 0.020*"term" + 0.018*"communication" + 0.016*"customer" + 0.016*"information" + 0.015*"field" + 0.015*"provide" + 0.015*"line" + 0.015*"apply" + 0.014*"duration"'),
+ (1, Project Management and Development
+  '0.048*"program" + 0.034*"development" + 0.033*"community" + 0.024*"education" + 0.022*"project" + 0.021*"health" + 0.019*"implementation" + 0.018*"support" + 0.017*"adp" + 0.015*"capacity"'),
+ (2, Software Design and Development
+  '0.036*"software" + 0.035*"development" + 0.032*"design" + 0.023*"team" + 0.021*"developer" + 0.019*"test" + 0.018*"system" + 0.017*"web" + 0.017*"technology" + 0.016*"develop"'),
+ (3, Sales and Marketing / Business Manager 
+  '0.050*"sale" + 0.048*"marketing" + 0.043*"bank" + 0.036*"market" + 0.031*"product" + 0.028*"service" + 0.027*"client" + 0.025*"business" + 0.023*"manager" + 0.019*"llc"'),
+ (4, Construction and Safety Engineering
+  '0.047*"equipment" + 0.029*"construction" + 0.023*"safety" + 0.018*"maintenance" + 0.017*"engineer" + 0.015*"site" + 0.014*"amd" + 0.014*"answer" + 0.014*"engineering" + 0.012*"pattern"'),
+ (5, Education and Training
+  '0.023*"course" + 0.023*"medium" + 0.017*"programme" + 0.016*"material" + 0.016*"content" + 0.015*"office" + 0.014*"student" + 0.014*"training" + 0.012*"study" + 0.010*"event"'),
+ (6, Finance and Accounting
+  '0.027*"report" + 0.022*"prepare" + 0.019*"control" + 0.018*"accounting" + 0.018*"ensure" + 0.018*"account" + 0.017*"finance" + 0.017*"system" + 0.013*"security" + 0.013*"tax"'),
+ (7, Project Management and Development 
+  '0.042*"project" + 0.027*"management" + 0.020*"development" + 0.015*"activity" + 0.015*"plan" + 0.014*"ensure" + 0.014*"support" + 0.013*"develop" + 0.011*"report" + 0.011*"provide"')]
+
+7 topics
+
+[(0, Sales and Marketing 
+  '0.024*"ability" + 0.021*"communication" + 0.019*"customer" + 0.018*"term" + 0.015*"sale" + 0.015*"line" + 0.015*"llc" + 0.014*"marketing" + 0.013*"service" + 0.012*"send"'),
+ (1, Project Management and Development 
+  '0.066*"project" + 0.036*"development" + 0.022*"program" + 0.019*"activity" + 0.018*"support" + 0.018*"implementation" + 0.013*"sector" + 0.013*"include" + 0.012*"community" + 0.011*"ensure"'),
+ (2, Banking and Finance
+  '0.024*"report" + 0.016*"bank" + 0.015*"datum" + 0.014*"prepare" + 0.012*"indicate" + 0.011*"year" + 0.011*"accounting" + 0.010*"finance" + 0.010*"branch" + 0.010*"account"'),
+ (3, Software Development 
+  '0.039*"development" + 0.037*"software" + 0.033*"design" + 0.025*"team" + 0.022*"developer" + 0.018*"web" + 0.017*"develop" + 0.016*"test" + 0.015*"system" + 0.015*"technology"'),
+ (4, Construction and Safety Engineering 
+  '0.034*"engineering" + 0.022*"construction" + 0.018*"safety" + 0.017*"test" + 0.014*"engineer" + 0.014*"store" + 0.013*"site" + 0.012*"register" + 0.011*"amd" + 0.011*"answer"'),
+ (5, Education and Training 
+  '0.018*"office" + 0.017*"course" + 0.015*"training" + 0.012*"expert" + 0.011*"study" + 0.010*"student" + 0.010*"material" + 0.010*"education" + 0.009*"medium" + 0.009*"month"'),
+ (6, Business Development and Management 
+  '0.035*"management" + 0.025*"ensure" + 0.023*"business" + 0.020*"manage" + 0.019*"plan" + 0.017*"develop" + 0.016*"manager" + 0.013*"system" + 0.013*"service" + 0.012*"process"')]
+
+
+6 topics
+
+[(0,
+  '0.019*"ability" + 0.017*"office" + 0.016*"communication" + 0.011*"provide" + 0.011*"education" + 0.011*"information" + 0.010*"field" + 0.010*"write" + 0.009*"email" + 0.009*"term"'),
+ (1,
+  '0.028*"software" + 0.027*"development" + 0.025*"design" + 0.022*"team" + 0.016*"developer" + 0.016*"system" + 0.015*"test" + 0.015*"ability" + 0.014*"develop" + 0.014*"web"'),
+ (2,
+  '0.023*"bank" + 0.022*"report" + 0.015*"accounting" + 0.015*"account" + 0.014*"finance" + 0.014*"control" + 0.014*"service" + 0.013*"prepare" + 0.012*"management" + 0.012*"branch"'),
+ (3,
+  '0.048*"project" + 0.030*"development" + 0.021*"management" + 0.018*"ensure" + 0.018*"customer" + 0.017*"program" + 0.015*"implementation" + 0.015*"support" + 0.015*"activity" + 0.013*"plan"'),
+ (4,
+  '0.021*"course" + 0.016*"equipment" + 0.015*"training" + 0.013*"call" + 0.013*"student" + 0.012*"duration" + 0.011*"october" + 0.011*"contact" + 0.010*"start" + 0.010*"take"'),
+ (5,
+  '0.036*"sale" + 0.034*"marketing" + 0.026*"llc" + 0.021*"manager" + 0.021*"service" + 0.021*"market" + 0.020*"product" + 0.015*"term" + 0.015*"ability" + 0.014*"business"')]

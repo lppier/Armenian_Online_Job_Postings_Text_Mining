@@ -17,14 +17,19 @@ import gensim
 from gensim import corpora
 import spacy
 
+pd.options.mode.chained_assignment = None  # default='warn'
+
 
 def preprocess(tokens):
     tokens_nop = [t for t in tokens if t not in string.punctuation]
     tokens_nop = [t.lower() for t in tokens_nop]
     # wnl = nltk.WordNetLemmatizer()
     stop = stopwords.words('english')
-    stop.extend(['armenian','armenia', 'job', 'title', 'position', 'location', 'responsibilities', 'application', 'procedures',
-                 'deadline', 'required', 'qualifications', 'renumeration', 'salary', 'date', 'company'])
+    stop.extend(
+        ['armenian', 'armenia', 'job', 'title', 'position', 'location', 'responsibilities', 'application', 'procedures',
+         'deadline', 'required', 'qualifications', 'renumeration', 'salary', 'date', 'company', 'yerevan',
+         'eligibility', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september',
+         'october', 'november', 'december'])
     tokens_nostop = [t for t in tokens_nop if t not in stop]
     # tokens_lem = [wnl.lemmatize(t) for t in tokens_nostop]
     tokens_clean = [t for t in tokens_nostop if len(t) >= 3]  # simple way to remove the offending " punctuations
@@ -112,7 +117,7 @@ print(dictionary)
 dictionary.filter_extremes(no_below=3, no_above=0.7)
 print(dictionary)
 
-topic_num = 6
+topic_num = 7
 
 # Use the dictionary to prepare a DTM (using TF)
 dtm_train = [dictionary.doc2bow(d) for d in df['jobpost_processed']]
@@ -129,32 +134,29 @@ for i in range(0, 5):
 # get and plot the distribution of the topics
 from operator import itemgetter
 import matplotlib.style as style
+
 style.use('ggplot')
 style.use('seaborn-poster')
 fig, ax = plt.subplots(figsize=(16, 9))
 top_train = [max(t, key=itemgetter(1))[0] for t in dtopics_train]
-plt.hist(top_train, bins=topic_num-1)
+plt.hist(top_train, bins=topic_num - 1)
 plt.title('Topic Frequencies')
 plt.show()
 
 #
-# [(0,
-#   '0.032*"ability" + 0.021*"term" + 0.020*"communication" + 0.018*"line" + 0.017*"customer" + 0.015*"service" + 0.015*"provide" + 0.015*"office" + 0.014*"field" + 0.014*"apply"'),
-#  (1,
-#   '0.032*"report" + 0.031*"management" + 0.021*"ensure" + 0.018*"prepare" + 0.017*"process" + 0.017*"control" + 0.015*"standard" + 0.015*"accounting" + 0.014*"finance" + 0.014*"account"'),
-#  (2,
-#   '0.046*"developer" + 0.039*"bank" + 0.037*"web" + 0.026*"branch" + 0.025*"service" + 0.022*"form" + 0.020*"security" + 0.019*"indicate" + 0.017*"solution" + 0.017*"framework"'),
-#  (3,
-#   '0.082*"network" + 0.042*"content" + 0.040*"platform" + 0.037*"student" + 0.026*"tumo" + 0.019*"administration" + 0.017*"linux" + 0.017*"board" + 0.016*"administrator" + 0.015*"support"'),
-#  (4,
-#   '0.064*"project" + 0.034*"development" + 0.021*"support" + 0.020*"activity" + 0.018*"program" + 0.018*"implementation" + 0.015*"ensure" + 0.013*"sector" + 0.013*"include" + 0.012*"community"'),
-#  (5,
-#   '0.062*"criterion" + 0.059*"to/_eligibility" + 0.031*"construction" + 0.025*"safety" + 0.020*"qualify" + 0.018*"food" + 0.017*"vehicle" + 0.017*"period" + 0.016*"sense_responsibility" + 0.014*"transportation"'),
-#  (6,
-#   '0.027*"education" + 0.025*"training" + 0.018*"research" + 0.017*"october" + 0.016*"yerevan" + 0.014*"program" + 0.014*"conduct" + 0.014*"november" + 0.014*"applicant" + 0.013*"request"'),
-#  (7,
-#   '0.042*"course" + 0.039*"medium" + 0.030*"material" + 0.019*"september" + 0.018*"business" + 0.015*"office" + 0.014*"council_europe" + 0.014*"level" + 0.013*"class" + 0.011*"sponsorship"'),
-#  (8,
-#   '0.049*"sale" + 0.046*"marketing" + 0.038*"product" + 0.038*"business" + 0.035*"market" + 0.028*"develop" + 0.019*"manager" + 0.018*"llc" + 0.018*"plan" + 0.017*"client"'),
-#  (9,
-#   '0.045*"development" + 0.044*"software" + 0.037*"design" + 0.028*"team" + 0.022*"test" + 0.022*"system" + 0.020*"technology" + 0.020*"develop" + 0.016*"engineer" + 0.015*"application"')]
+# 7 topics
+#
+# [(0, Sales and Marketing
+#   '0.024*"ability" + 0.021*"communication" + 0.019*"customer" + 0.018*"term" + 0.015*"sale" + 0.015*"line" + 0.015*"llc" + 0.014*"marketing" + 0.013*"service" + 0.012*"send"'),
+#  (1, Project Management and Development
+#   '0.066*"project" + 0.036*"development" + 0.022*"program" + 0.019*"activity" + 0.018*"support" + 0.018*"implementation" + 0.013*"sector" + 0.013*"include" + 0.012*"community" + 0.011*"ensure"'),
+#  (2, Banking and Finance
+#   '0.024*"report" + 0.016*"bank" + 0.015*"datum" + 0.014*"prepare" + 0.012*"indicate" + 0.011*"year" + 0.011*"accounting" + 0.010*"finance" + 0.010*"branch" + 0.010*"account"'),
+#  (3, Software Development
+#   '0.039*"development" + 0.037*"software" + 0.033*"design" + 0.025*"team" + 0.022*"developer" + 0.018*"web" + 0.017*"develop" + 0.016*"test" + 0.015*"system" + 0.015*"technology"'),
+#  (4, Construction and Safety Engineering
+#   '0.034*"engineering" + 0.022*"construction" + 0.018*"safety" + 0.017*"test" + 0.014*"engineer" + 0.014*"store" + 0.013*"site" + 0.012*"register" + 0.011*"amd" + 0.011*"answer"'),
+#  (5, Education and Training
+#   '0.018*"office" + 0.017*"course" + 0.015*"training" + 0.012*"expert" + 0.011*"study" + 0.010*"student" + 0.010*"material" + 0.010*"education" + 0.009*"medium" + 0.009*"month"'),
+#  (6, Business Development and Management
+#   '0.035*"management" + 0.025*"ensure" + 0.023*"business" + 0.020*"manage" + 0.019*"plan" + 0.017*"develop" + 0.016*"manager" + 0.013*"system" + 0.013*"service" + 0.012*"process"')]
