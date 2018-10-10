@@ -62,25 +62,9 @@ print("Removed {0} duplicates (based on RequiredQual)".format(df_ori.shape[0] - 
 
 print(df['RequiredQual'].head())
 
-# Convert to list
-df['RequiredQual'] = df['RequiredQual'].apply(lambda x: re.sub('\s+', ' ', x))  # remove newlines
-df['RequiredQual'] = df['RequiredQual'].apply(lambda x: re.sub("\'", "", x))  # remove single quotes
-re1 = '(www)'  # Word 1
-re2 = '(\\.)'  # Any Single Character 1
-re3 = '((?:[a-z][a-z0-9_]*))'  # Variable Name 1
-re4 = '(\\.)'  # Any Single Character 2
-re5 = '((?:[a-z][a-z0-9_]*))'  # Variable Name 2
-rg = re.compile(re1 + re2 + re3 + re4 + re5, re.IGNORECASE | re.DOTALL)
-df['RequiredQual'] = df['RequiredQual'].apply(lambda x: re.sub(rg, "", x))
-re1 = '((?:[a-z][a-z0-9_]*))'  # Variable Name 1
-re2 = '(\\.)'  # Any Single Character 1
-re3 = '((?:[a-z][a-z0-9_]*))'  # Word 1
-rg = re.compile(re1 + re2 + re3, re.IGNORECASE | re.DOTALL)
-df['RequiredQual'] = df['RequiredQual'].apply(lambda x: re.sub(rg, "", x))
-df.jobpost = df.jobpost.apply(lambda x: re.sub('(\\d+)', "", x))  # remove numbers
-
-df['RequiredQual_tokens'] = df.jobpost.map(word_tokenize)
-df['RequiredQual_tokens'] = df.RequiredQual_tokens.apply(set)
+df['RequiredQual'] = df['RequiredQual'].astype(str)
+df['RequiredQual_tokens'] = df.RequiredQual.map(word_tokenize)
+# df['RequiredQual_tokens'] = df.RequiredQual_tokens.apply(set)
 df['RequiredQual_processed'] = df.RequiredQual_tokens.apply(preprocess)
 # df['jobpost_processedtext'] = df.jobpost_processed.apply(lambda x: ' '.join(x))
 
@@ -91,7 +75,7 @@ bigram_mod = gensim.models.phrases.Phraser(bigram)
 trigram_mod = gensim.models.phrases.Phraser(trigram)
 
 ## no clue what this does?
-print(trigram_mod[bigram_mod[df.jobpost_processed[5]]])
+print(trigram_mod[bigram_mod[df.RequiredQual_tokens[5]]])
 
 df.RequiredQual_processed = make_bigrams(df.RequiredQual_processed)
 df.RequiredQual_processed = lemmatization(df.RequiredQual_processed, allowed_postags=['NOUN', 'VERB'])  # 'ADJ',, 'ADV'])
@@ -102,14 +86,14 @@ print(dictionary)
 dictionary.filter_extremes(no_below=3, no_above=0.7)
 print(dictionary)
 
-topic_num = 6
+topic_num = 4
 
 # Use the dictionary to prepare a DTM (using TF)
 dtm_train = [dictionary.doc2bow(d) for d in df['RequiredQual_processed']]
 lda = gensim.models.ldamodel.LdaModel(dtm_train, num_topics=topic_num, alpha='auto', chunksize=30, id2word=dictionary,
                                       passes=20, random_state=432)
 lda.show_topics()
-lda.show_topics(num_words=20)
+print(lda.show_topics(num_words=20))
 
 dtopics_train = lda.get_document_topics(dtm_train)
 # print topic distribution for 1st 5 rows
@@ -126,25 +110,3 @@ top_train = [max(t, key=itemgetter(1))[0] for t in dtopics_train]
 plt.hist(top_train, bins=topic_num-1)
 plt.title('Topic Frequencies')
 plt.show()
-
-#
-# [(0,
-#   '0.032*"ability" + 0.021*"term" + 0.020*"communication" + 0.018*"line" + 0.017*"customer" + 0.015*"service" + 0.015*"provide" + 0.015*"office" + 0.014*"field" + 0.014*"apply"'),
-#  (1,
-#   '0.032*"report" + 0.031*"management" + 0.021*"ensure" + 0.018*"prepare" + 0.017*"process" + 0.017*"control" + 0.015*"standard" + 0.015*"accounting" + 0.014*"finance" + 0.014*"account"'),
-#  (2,
-#   '0.046*"developer" + 0.039*"bank" + 0.037*"web" + 0.026*"branch" + 0.025*"service" + 0.022*"form" + 0.020*"security" + 0.019*"indicate" + 0.017*"solution" + 0.017*"framework"'),
-#  (3,
-#   '0.082*"network" + 0.042*"content" + 0.040*"platform" + 0.037*"student" + 0.026*"tumo" + 0.019*"administration" + 0.017*"linux" + 0.017*"board" + 0.016*"administrator" + 0.015*"support"'),
-#  (4,
-#   '0.064*"project" + 0.034*"development" + 0.021*"support" + 0.020*"activity" + 0.018*"program" + 0.018*"implementation" + 0.015*"ensure" + 0.013*"sector" + 0.013*"include" + 0.012*"community"'),
-#  (5,
-#   '0.062*"criterion" + 0.059*"to/_eligibility" + 0.031*"construction" + 0.025*"safety" + 0.020*"qualify" + 0.018*"food" + 0.017*"vehicle" + 0.017*"period" + 0.016*"sense_responsibility" + 0.014*"transportation"'),
-#  (6,
-#   '0.027*"education" + 0.025*"training" + 0.018*"research" + 0.017*"october" + 0.016*"yerevan" + 0.014*"program" + 0.014*"conduct" + 0.014*"november" + 0.014*"applicant" + 0.013*"request"'),
-#  (7,
-#   '0.042*"course" + 0.039*"medium" + 0.030*"material" + 0.019*"september" + 0.018*"business" + 0.015*"office" + 0.014*"council_europe" + 0.014*"level" + 0.013*"class" + 0.011*"sponsorship"'),
-#  (8,
-#   '0.049*"sale" + 0.046*"marketing" + 0.038*"product" + 0.038*"business" + 0.035*"market" + 0.028*"develop" + 0.019*"manager" + 0.018*"llc" + 0.018*"plan" + 0.017*"client"'),
-#  (9,
-#   '0.045*"development" + 0.044*"software" + 0.037*"design" + 0.028*"team" + 0.022*"test" + 0.022*"system" + 0.020*"technology" + 0.020*"develop" + 0.016*"engineer" + 0.015*"application"')]
