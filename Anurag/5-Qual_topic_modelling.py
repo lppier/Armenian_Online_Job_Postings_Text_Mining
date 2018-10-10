@@ -86,7 +86,7 @@ print(dictionary)
 dictionary.filter_extremes(no_below=3, no_above=0.7)
 print(dictionary)
 
-topic_num = 4
+topic_num = 8
 
 # Use the dictionary to prepare a DTM (using TF)
 dtm_train = [dictionary.doc2bow(d) for d in df['RequiredQual_processed']]
