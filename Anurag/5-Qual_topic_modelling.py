@@ -69,15 +69,15 @@ df['RequiredQual_processed'] = df.RequiredQual_tokens.apply(preprocess)
 # df['jobpost_processedtext'] = df.jobpost_processed.apply(lambda x: ' '.join(x))
 
 # Build the bigram and trigram models
-bigram = gensim.models.Phrases(df['RequiredQual_processed'], min_count=5, threshold=100)  # higher threshold fewer phrases.
-trigram = gensim.models.Phrases(bigram[df['RequiredQual_processed']], threshold=100)
-bigram_mod = gensim.models.phrases.Phraser(bigram)
-trigram_mod = gensim.models.phrases.Phraser(trigram)
+# bigram = gensim.models.Phrases(df['RequiredQual_processed'], min_count=5, threshold=100)  # higher threshold fewer phrases.
+#trigram = gensim.models.Phrases(bigram[df['RequiredQual_processed']], threshold=100)
+#bigram_mod = gensim.models.phrases.Phraser(bigram)
+#trigram_mod = gensim.models.phrases.Phraser(trigram)
 
 ## no clue what this does?
-print(trigram_mod[bigram_mod[df.RequiredQual_tokens[5]]])
+#print(trigram_mod[bigram_mod[df.RequiredQual_tokens[5]]])
 
-df.RequiredQual_processed = make_bigrams(df.RequiredQual_processed)
+# df.RequiredQual_processed = make_bigrams(df.RequiredQual_processed)
 df.RequiredQual_processed = lemmatization(df.RequiredQual_processed, allowed_postags=['NOUN', 'VERB'])  # 'ADJ',, 'ADV'])
 
 # logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -86,7 +86,7 @@ print(dictionary)
 dictionary.filter_extremes(no_below=3, no_above=0.7)
 print(dictionary)
 
-topic_num = 4
+topic_num = 7
 
 # Use the dictionary to prepare a DTM (using TF)
 dtm_train = [dictionary.doc2bow(d) for d in df['RequiredQual_processed']]
