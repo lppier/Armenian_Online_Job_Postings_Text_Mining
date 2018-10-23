@@ -1,8 +1,14 @@
 # Text Mining on Armenian Online Job Postings 
 
-Dataset : https://www.kaggle.com/udacity/armenian-online-job-postings/home
+**Dataset :** https://www.kaggle.com/udacity/armenian-online-job-postings/home
 
-Techniques Used: Text pre-processing, Regex, K-means Clustering, Topic Modelling, Text-based Classification, Information Extraction
+**Techniques Used:** 
+..* Text pre-processing
+..* Regex
+..* K-means Clustering
+..* Topic Modelling
+..* Text-based Classification
+..* Information Extraction
 
 
 Online job advertisements have become the dominant job searching and employer-employee job matching model in most developed economies around the world and gaining popularity in all parts of the world. It is estimated that in 2014 that more than 70 percent of job openings are posted online in the United States of America and by researching the detailed data of the online jobs ads, researchers can better understand the labour market.
